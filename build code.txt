@@ -1,0 +1,1 @@
+pyinstaller --noconsole --windowed --clean --onefile --add-data "LOGO/logo.png:LOGO" --icon app.ico main.py
