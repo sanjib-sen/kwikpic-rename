@@ -26,11 +26,11 @@
 
     1. (Mac)
         ```bash
-        pyinstaller --noconsole --name Kwikpic --windowed --clean --onedir --add-data "LOGO/logo.png:LOGO" --icon app.ico mac.py
+        pyinstaller --noconsole --name Kwikpic --windowed --clean --onefile --add-data "LOGO/logo.png:." --icon app.ico main.py
         ```
     2. (Windows) if you are on Windows:
         ```bash
-        pyinstaller --onefile --name Kwikpic --noconsole --clean --icon=app.ico --add-data "LOGO/logo.png;LOGO"  windows.py
+        pyinstaller --onefile --name Kwikpic --noconsole --clean --icon=app.ico --add-data "LOGO/logo.png;."  main.py
         ```
 5. Open to the **dist** folder and:
     1. Open **Kwikpic.exe** if you are on Windows. 
