@@ -102,7 +102,7 @@ class Ui_Form(object):
             os.mkdir(COMPRESS_DIR)
         print("Optimizing", UNKNOWN_DIR)
 
-        count = sum([len(files) for r, d, files in os.walk(UNKNOWN_DIR)])
+        count = count = fileCount(UNKNOWN_DIR)
         curr_count = 0
 
         for path, _, files in os.walk(UNKNOWN_DIR):
@@ -145,14 +145,33 @@ class Ui_Form(object):
                     resized = cv2.resize(img, dim, interpolation = cv2.INTER_AREA)
                     
                     print('Resized Dimensions : ',resized.shape)
-
+            
                     dir_name = os.path.dirname(img_rel_path)
-                    print(dir_name)
                     if not os.path.exists(COMPRESS_DIR+dir_name) and not COMPRESS_DIR+dir_name == "":
                         os.makedirs(COMPRESS_DIR+dir_name)
+                    img_rel_path = img_rel_path.rsplit(".", 1)[0]+".jpg"
                     cv2.imwrite(COMPRESS_DIR+img_rel_path, resized, [int(cv2.IMWRITE_JPEG_QUALITY), QUALITY_PERCENTAGE])
 
-        self.label_4.setText("Complete. "+str(curr_count)+" images optimized")
+        self.label_4.setText("Complete. "+str(count)+" images optimized")
+
+def fileCount(folder):
+    "count the number of files in a directory"
+    exts = ['.bmp', '.dib','.jpeg','.jpg','.jp2','.png','.webp',
+            '.pbm','.pgm','.ppm','.pxm','.pnm','.pfm','.sr','.ras',
+            '.tiff','.tif','.exr','.hdr','.pic']
+    count = 0
+
+    for filename in os.listdir(folder):
+        path = os.path.join(folder, filename)
+        
+        if os.path.isfile(path):
+            if path.endswith(tuple(exts)):
+                count += 1
+        elif os.path.isdir(path):
+            count += fileCount(path)
+
+    return count
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
