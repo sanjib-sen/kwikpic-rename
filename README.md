@@ -26,7 +26,7 @@
 
     1. (Mac)
         ```bash
-        pyinstaller --noconsole --name Kwikpic --windowed --clean --onefile --add-data "LOGO/logo.png:." --icon app.ico main.py
+        pyinstaller --noconsole --name Kwikpic --windowed --clean --onedir --add-data "LOGO/logo.png:." --icon app.ico main.py
         ```
     2. (Windows) if you are on Windows:
         ```bash
